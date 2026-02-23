@@ -1,0 +1,609 @@
+/* globals.css */
+
+/* Reset and base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #EAEAEA;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative; /* Good for child absolute/fixed positioning contexts */
+}
+
+/* --- Elite Background --- */
+body {
+  background-color: #121212; /* Very dark grey, almost black */
+}
+
+/* --- Wallpaper Changer Icon --- */
+.wallpaper-changer-icon {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(40, 40, 40, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(70, 70, 70, 0.5);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000; /* Same as navbar, ensure one is higher if they overlap, or manage carefully */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s, transform 0.2s;
+}
+.wallpaper-changer-icon:hover {
+  background-color: rgba(55, 55, 55, 0.9);
+  transform: scale(1.05);
+}
+.wallpaper-changer-icon svg,
+.wallpaper-changer-icon span {
+  width: 22px;
+  height: 22px;
+  color: #B0B0B0;
+  font-size: 1.3rem;
+}
+
+/* --- Navbar Styling --- */
+.navbar {
+  /* === FIXED NAVBAR STYLES === */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; /* This makes it full-width */
+  z-index: 1000; /* High z-index to stay on top */
+  
+  /* Background - CHOOSE ONE OPTION: */
+  /* Option 1: Solid background (matches body, good for simplicity) */
+  background-color: #121212; 
+  /* Option 2: Slightly different solid background for visual separation */
+  /* background-color: #1A1A1D; */
+  /* Option 3: Glassmorphism (ensure readability) */
+  /* background-color: rgba(18, 18, 18, 0.85); */
+  /* backdrop-filter: blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
+  
+  /* Optional: Subtle bottom border for visual separation */
+  border-bottom: 1px solid #282828; 
+  
+  color: #D1D1D1; /* Default text color for items directly in navbar (if any) */
+}
+
+/* Wrapper for navbar content to constrain its width and apply horizontal padding */
+.navbar-content-wrapper {
+  max-width: 1100px; /* Same as .page-container */
+  margin: 0 auto; /* Centers the content */
+  padding: 15px 24px; /* Vertical and Horizontal padding for navbar items - ADJUST VERTICAL AS NEEDED FOR HEIGHT */
+  width: 100%; /* Take full width of its parent (.navbar) before max-width kicks in */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo-items {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-item.home-icon svg { /* Target SVG directly for logo */
+  width: 28px;  /* Adjust as needed */
+  height: 28px; /* Adjust as needed */
+  fill: #FFFFFF; /* Prominent logo color */
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-item {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #A0A0A0;
+  padding: 8px 4px; /* For hover/active states */
+  transition: color 0.2s ease-in-out, border-bottom-color 0.2s ease-in-out;
+  border-bottom: 2px solid transparent;
+  position: relative;
+  text-decoration: none; /* Remove default link underline */
+}
+.nav-item:hover {
+  color: #E0E0E0;
+}
+.nav-item.active {
+  color: #FFFFFF;
+  border-bottom-color: #007AFF; /* CHOOSE YOUR BRAND ACCENT (e.g., #a855f7 for purple) */
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Slightly reduced gap for tighter action items */
+}
+
+.nav-action-item { /* Unified style for icon buttons in navbar */
+  background: none;
+  border: none;
+  color: #A0A0A0;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-action-item:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: #FFFFFF;
+}
+.nav-action-item svg {
+  display: block; /* Helps with consistent alignment */
+}
+
+.search-icon-btn svg { /* Class from NavBar.tsx */
+    width: 20px; height: 20px;
+}
+.sidebar-toggle-btn svg { /* Class from NavBar.tsx, Bell icon */
+    width: 22px; height: 22px;
+}
+.sidebar-toggle-btn {
+    position: relative; /* For notification badge */
+}
+.notification-badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    background-color: #E91E63; /* Accent color - use your brand accent */
+    color: white;
+    border-radius: 50%;
+    width: 16px; height: 16px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 1px solid #0F0F0F; /* Match sidebar bg for contrast if sidebar is open */
+}
+
+.profile-icons {
+  display: flex;
+  align-items: center;
+}
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: -10px;
+  border: 2px solid #121212; /* Matches body background */
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.profile-icon:first-child {
+  margin-left: 0;
+}
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-icon.more {
+  background-color: #333;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* --- Main Page Content Pusher --- */
+/* This class will be applied to the <main> tag in layout.tsx */
+.page-content-pusher {
+  padding-top: 68px; /* <<< IMPORTANT: ADJUST THIS TO YOUR NAVBAR'S ACTUAL HEIGHT (e.g., 68px, 70px, 72px) */
+}
+
+/* General Content Container (applied to wrappers on individual pages if needed) */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px; /* Horizontal padding for page content */
+  /* Any top/bottom padding for general pages can go here,
+     but .page-content-pusher handles the space for the navbar. */
+}
+
+/* --- Hero Section Refinement --- */
+.hero-section {
+  text-align: center;
+  padding: 40px 20px 60px; /* Adjusted top padding since navbar space is now global */
+  color: #FFFFFF;
+}
+/* ... (rest of hero-title, hero-subtitle, hero-buttons styles are fine) ... */
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #B0B0B0;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+/* --- Button Refinement --- */
+.btn {
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s ease-out, box-shadow 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.btn-brand-primary {
+  background-color: #007AFF; /* CHOOSE YOUR BRAND PRIMARY COLOR */
+  color: #FFFFFF;
+}
+.btn-brand-primary:hover {
+  background-color: #005ECB;
+}
+.btn-outline {
+  background-color: transparent;
+  color: #E0E0E0;
+  border: 2px solid #444;
+}
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #666;
+}
+.btn::after { /* Ripple effect (optional) */
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.3);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1,1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+/* --- Confession Card Refinement --- */
+.confessions-section {
+    padding: 40px 0;
+}
+/* ... (rest of confessions-grid, confession-card, card-header, etc. are fine) ... */
+.confessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.confession-card {
+  background-color: #1A1A1D;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.confession-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+.card-avatar span {
+  font-size: 1.5rem;
+  width: 40px; height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2C2C2E;
+  border-radius: 50%;
+  color: #8A8A8E;
+}
+.card-author {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #A0A0A0;
+}
+.card-content {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #D1D1D1;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #282828;
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+
+/* --- App Wrapper & Main Content Area for Sidebar --- */
+.app-wrapper {
+  display: flex;
+  position: relative;
+  overflow-x: hidden;
+}
+.main-content-area {
+  flex-grow: 1;
+  /* transition for margin-right is only needed if sidebar PUSHES content */
+  /* transition: margin-right 0.4s ease-in-out; */
+  width: 100%;
+}
+
+/* --- Friends Sidebar Styling & Animation --- */
+.friends-sidebar {
+  position: fixed;
+  top: 0; /* It will naturally sit below the fixed navbar if navbar has higher z-index and sidebar content has top padding */
+  right: -300px; /* Start off-screen */
+  width: 280px;
+  height: 100vh;
+  background-color: #0F0F0F;
+  border-left: 1px solid #2A2A2A;
+  z-index: 990; /* Below navbar (1000), above page content (default 0) */
+  color: #EAEAEA;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 25px rgba(0,0,0,0.3);
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.friends-sidebar.open {
+  right: 0;
+}
+
+.sidebar-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Adjust padding */
+  border-bottom: 1px solid #2A2A2A;
+  min-height: 68px; /* <<< MATCH THIS TO YOUR ACTUAL NAVBAR HEIGHT */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+.friends-sidebar-header {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #E91E63; /* BRAND ACCENT */
+}
+.sidebar-close-btn {
+  /* Uses .nav-action-item styles now */
+}
+
+.friend-list-scrollable {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px 20px 20px 20px; /* Added top padding */
+  list-style: none;
+  margin: 0;
+}
+/* ... (friend-list-scrollable scrollbar styles are fine) ... */
+.friend-list-scrollable::-webkit-scrollbar { width: 6px; }
+.friend-list-scrollable::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+.friend-list-scrollable::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ... (friend-item, friend-avatar, friend-info, friend-name, friend-status-location, friend-activity-status are fine) ... */
+.friend-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 10px; /* Adjusted padding */
+  gap: 12px;
+  border-bottom: 1px solid #202020;
+  transition: background-color 0.2s ease;
+  border-radius: 6px;
+  margin: 4px -10px; /* Offset for hover to fill padding area */
+}
+.friend-item:last-child { border-bottom: none; }
+.friend-item:hover { background-color: rgba(255,255,255,0.03); }
+.friend-avatar img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.friend-info { flex-grow: 1; }
+.friend-name { font-weight: 600; font-size: 0.95rem; color: #FFFFFF; }
+.friend-status-location { font-size: 0.8rem; color: #888; }
+.friend-activity-status { font-size: 0.85rem; font-weight: 500; }
+.friend-activity-status.online { color: #4CAF50; }
+.friend-activity-status.idle { color: #FFC107; }
+.friend-activity-status.offline { color: #777; }
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.2rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .nav-links { display: none; /* Hidden for burger menu on mobile */ }
+  .hero-buttons { flex-direction: column; gap: 16px; }
+  .btn { width: 100%; max-width: 300px; margin: 0 auto; }
+
+  .friends-sidebar {
+    width: 260px;
+    right: -280px; /* Ensure fully off-screen to start */
+  }
+  .friends-sidebar.open {
+    box-shadow: -2px 0 15px rgba(0,0,0,0.2);
+  }
+}
+
+
+/* key changes */
+/* globals.css */
+
+/* Reset and base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #EAEAEA;
+  background-color: #121212;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden; /* Still important */
+}
+
+/* --- Navbar Styling --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #121212; /* Or your chosen navbar background */
+  border-bottom: 1px solid #282828;
+  color: #D1D1D1;
+}
+
+.navbar-content-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 24px; /* Example: Leads to ~68px height with 1px border */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Main Page Content Pusher --- */
+.page-content-pusher {
+  /* === THIS IS THE CRUCIAL VALUE === */
+  padding-top: 68px; /* SET THIS TO YOUR ACTUAL NAVBAR HEIGHT */
+  /* Example: If navbar-content-wrapper padding is 15px top/bottom, and content is ~36px high,
+              and border is 1px -> 15+15+36+1 = 67px. Round up or measure precisely.
+  */
+}
+
+/* General Content Container (applied by specific pages like Home) */
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px; /* Only horizontal padding */
+}
+
+/* --- App Wrapper & Main Content Area --- */
+.app-wrapper {
+  /* This wrapper is mainly for the main content and potential future elements
+     that should sit beside the sidebar if it were to push content.
+     Since the sidebar is fixed overlay, this is simpler. */
+  display: flex; /* Not strictly necessary if sidebar is overlay */
+}
+
+.main-content-area {
+  flex-grow: 1;
+  width: 100%; /* Takes full available width */
+}
+
+
+/* --- Friends Sidebar Styling & Animation --- */
+.friends-sidebar {
+  position: fixed;
+  top: 0; /* Stick to the top of the viewport */
+  right: -300px; /* Start off-screen (adjust width + a bit extra if needed) */
+  width: 280px;
+  height: 100vh; /* Full viewport height */
+  background-color: #0F0F0F;
+  border-left: 1px solid #2A2A2A;
+  z-index: 990; /* Below navbar (1000) */
+  color: #EAEAEA;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -5px 0 25px rgba(0,0,0,0.3);
+  transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow-y: auto; /* Add scroll for content within sidebar */
+}
+
+.friends-sidebar.open {
+  right: 0; /* Slide in */
+}
+
+.sidebar-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Horizontal padding */
+  /* === THIS IS ALSO CRUCIAL === */
+  min-height: 68px; /* MATCH THIS TO YOUR ACTUAL NAVBAR HEIGHT */
+  border-bottom: 1px solid #2A2A2A;
+  flex-shrink: 0;
+}
+
+.friends-sidebar-header { /* "MI AMOR" text */
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #E91E63; /* Your brand accent */
+}
+
+.sidebar-close-btn { /* The 'X' button */
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 8px; /* Make it easier to click */
+  border-radius: 50%;
+  /* transition from .nav-action-item can be used if you apply that class */
+}
+.sidebar-close-btn:hover {
+  background-color: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.sidebar-close-btn svg {
+  display: block;
+}
+
+.friend-list-scrollable {
+  flex-grow: 1;
+  /* overflow-y: auto; -- Moved to .friends-sidebar itself */
+  padding: 10px 20px 20px 20px;
+  list-style: none;
+  margin: 0;
+}
+/* ... (Scrollbar styles and other friend-item styles can remain as they were) ... */
+
+
+/* Adjust full-height pages */
+.confessions-page-layout,
+.immersive-stream-room-page-layout {
+  /* The parent of these elements is now .page-content-pusher,
+     which already has the necessary top padding.
+     So these elements need to fill the remaining height of their PARENT.
+     If their parent is directly <main class="page-content-pusher">
+     and <main> doesn't have a specific height, then 100vh minus navbar still applies.
+  */
+  height: calc(100vh - 68px); /* ADJUST 68px to your navbar height */
+  overflow-y: auto; /* Allow scrolling within these full-height sections if content overflows */
+}
+/* If .page-content-pusher is given display:flex and flex-direction:column,
+   and these layouts are direct children, they could use flex-grow:1
+   However, calc(100vh - NAVBAR_HEIGHT) is generally more reliable for this. */
+
+/* ... (rest of your globals.css: .nav-logo-items, .nav-item, .nav-actions, etc.
+      These should mostly be fine as they are styled within .navbar-content-wrapper) ... */
